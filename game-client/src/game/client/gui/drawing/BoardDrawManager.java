@@ -81,7 +81,8 @@ public final class BoardDrawManager {
  		g2d.fillRect((int)(offsetX), (int)(offsetY), (int)(width- 2*offsetX), (int)(height- 2*offsetY));
 	}
 	public void drawBoardGrid(Graphics2D g2d, GameServer remoteServer) {
-		g2d.setColor(p.getColor());
+		g2d.setColor(Color.BLACK);
+                
  		g2d.setStroke(new BasicStroke(1.0F));
  		try {
 			for(int i=0;i<= remoteServer.getWidht();i++)
@@ -110,15 +111,19 @@ public final class BoardDrawManager {
 			for(int i=0;i<remoteServer.getWidht();i++)
 				for(int j=0;j<remoteServer.getHeight();j++)
 				{
+      
+                                     
 					if (remoteServer.getCellWall(i, j, Side.top).getState()) drawLine(i, j, Side.top, g2d); 
 					if (remoteServer.getCellWall(i, j, Side.bottom).getState()) drawLine(i, j, Side.bottom, g2d); 
 					if (remoteServer.getCellWall(i, j, Side.left).getState()) drawLine(i, j, Side.left, g2d); 
 					if (remoteServer.getCellWall(i, j, Side.right).getState()) drawLine(i, j, Side.right, g2d); 
+                                   
 				}
 		} catch (RemoteException e) { e.printStackTrace(); }
 	}
 	public void drawAssist(Graphics2D g2d, Point point, GameServer remoteServer) {
 		if (point!=null) {
+                    
 			Point cell = getCell(point.x, point.y);
 			g2d.setColor(new Color(0.95F,0.95F,0.95F,0.5F));
 			g2d.fillRoundRect((int)(offsetX+cell.x*cellSize+cellSize*0.1) , (int)(offsetY+cell.y*cellSize+cellSize*0.1), 
@@ -136,6 +141,7 @@ public final class BoardDrawManager {
 		}
 	}
 	public void drawSelectedSide(Graphics2D g2d, Point point) {
+           
 		g2d.setColor(Color.BLACK);
  		g2d.setStroke(new BasicStroke(tickness, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
  		Point cell = getCell(point.x, point.y);

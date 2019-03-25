@@ -7,10 +7,10 @@ public class Player implements Serializable {
 
 	private static final long serialVersionUID = 797114087962339063L;
 	private static int playerCount = 0;
-	private int id;
-	private String name;
-	private int figure;
-	private Color color;
+	private final int id;
+	private final String name;
+	private final int figure;
+	private final Color color;
 	private int score = 0;
 
 	public Player(String name, int figure, Color color) {
