@@ -25,7 +25,7 @@ public class JMainWindow extends JFrame {
 	private JPanel contentPane;
 	private GameServer server;
 	private static int playerID = -1;
-	private static String playerName;
+	//private static String playerName;
 	
 	private JBoardArea gameArea;
 
@@ -78,7 +78,7 @@ public class JMainWindow extends JFrame {
 				JOptionPane.showMessageDialog(this, "Game already started!", "Game started", JOptionPane.CLOSED_OPTION);
 				System.exit(-1);
 			}
-        	playerName = name;
+        	//playerName = name;
 		} catch (RemoteException e) { e.printStackTrace(); }	
 		
 		initGUI(server);

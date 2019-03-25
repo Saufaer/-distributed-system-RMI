@@ -90,7 +90,7 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 		sc = new Scanner(System.in);
 		System.out.println("-> Start server ...");
 		try {
-			if (args.length<2) obj = new GameServerImpl(5,5);
+			if (args.length<2) obj = new GameServerImpl(6,6);
 			else obj = new GameServerImpl(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
                         
                         String localhost    = "127.0.0.1";
@@ -165,12 +165,5 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 		return p.getID();	
 		} else return -1;
 	}
-//	@Override
-//	public void newMessage(String name, String text) throws RemoteException {
-//		if (callbacks != null)
-//		try {
-//			for(ServerCallbacks sc : callbacks) sc.newMessageForChat(name, text);
-//		} catch (RemoteException e) { e.printStackTrace(); }
-//		
-//	}
+
 }

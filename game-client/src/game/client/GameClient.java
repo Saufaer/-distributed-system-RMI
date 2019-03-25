@@ -7,8 +7,6 @@ import game.server.GameServer;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.rmi.Remote;
 
@@ -58,21 +56,15 @@ public class GameClient {
 			public void run() {
 				try {
 					final JClientDialog dialog = new JClientDialog();
-					dialog.setVisible(true);
-					dialog.okButton.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							dialog.setVisible(false);
+
 							String rmi = dialog.getRmi();
 							String name = dialog.getName();
 							int f = dialog.getPlayerFigure() + 1;
 							Color c = dialog.getPlayerColor();
 							String colorS = Integer.toString(c.getRGB());
-							dialog.dispose();
+				
 							startGame(rmi, name, f, colorS);
-						}
-					});
+
 				} catch (Exception e) { e.printStackTrace(); }
 			}
 		});
