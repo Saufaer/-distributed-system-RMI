@@ -25,7 +25,7 @@ public class JMainWindow extends JFrame {
 	private JPanel contentPane;
 	private GameServer server;
 	private static int playerID = -1;
-	//private static String playerName;
+	
 	
 	private JBoardArea gameArea;
 
@@ -38,7 +38,7 @@ public class JMainWindow extends JFrame {
      * @param colorS
 	 */
 	public JMainWindow(GameServer gameServer, String name, int figure, String colorS) {
-		setTitle("Goridors 1.0: " + name);
+		setTitle(name);
 		this.server = gameServer;
 		
 		try {
@@ -55,22 +55,13 @@ public class JMainWindow extends JFrame {
 					else gameArea.off();
 				}
 				@Override
-				public void updateScore(int ID, int score) throws RemoteException {
-
-				}
-				@Override
 				public void startGame() throws RemoteException {
-
 					gameArea.setVisible(true);
-
 				}
 
 				@Override
 				public void gameOver(int idWinner) throws RemoteException {
-                                    
 					gameArea.endGame();
-                                          
-
 				}
 			});
 			playerID = server.addPlayer(name, figure, colorS);
@@ -78,7 +69,6 @@ public class JMainWindow extends JFrame {
 				JOptionPane.showMessageDialog(this, "Game already started!", "Game started", JOptionPane.CLOSED_OPTION);
 				System.exit(-1);
 			}
-        	//playerName = name;
 		} catch (RemoteException e) { e.printStackTrace(); }	
 		
 		initGUI(server);
@@ -88,7 +78,7 @@ public class JMainWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 700, 500);
+		setBounds(100, 100, 600, 600);
 		contentPane =  new JPanel();
 
 		setContentPane(contentPane);

@@ -25,7 +25,7 @@ public class JBoardArea extends JPanel {
 	
 	public class Options {
 		public static final int PREF_W = 600;
-	   	public static final int PREF_H = 400;
+	   	public static final int PREF_H = 600;
 	   	public static final int PREF_TICKNESS = 5;
 	   	public static final float PREF_COEF = 0.8F;
 	   	

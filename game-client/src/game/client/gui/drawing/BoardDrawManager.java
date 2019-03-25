@@ -81,7 +81,7 @@ public final class BoardDrawManager {
  		g2d.fillRect((int)(offsetX), (int)(offsetY), (int)(width- 2*offsetX), (int)(height- 2*offsetY));
 	}
 	public void drawBoardGrid(Graphics2D g2d, GameServer remoteServer) {
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(p.getColor());
  		g2d.setStroke(new BasicStroke(1.0F));
  		try {
 			for(int i=0;i<= remoteServer.getWidht();i++)

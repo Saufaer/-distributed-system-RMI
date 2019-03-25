@@ -20,9 +20,5 @@ public abstract class ServerCallbacksAdapter extends UnicastRemoteObject impleme
         @Override
 	public abstract void nextPlayer(Player next) throws RemoteException;
         @Override
-	public abstract void updateScore(int playerID, int score) throws RemoteException;
-        @Override
 	public abstract void startGame() throws RemoteException;
- //       @Override
-//	public abstract void newMessageForChat(String name, String text) throws RemoteException;
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 
@@ -39,7 +40,7 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 		board = new GameBoard(w<1 ? DEF_SIZE : w, h<1 ? DEF_SIZE : h);
 		callbacks = new ArrayList<ServerCallbacks>();
 		playersList = new ArrayList<Player>();
-		System.out.println("-> Gameboard created");
+		System.out.println("-- Gameboard created");
 		System.out.println("\tWidth " + board.getWidht());
 		System.out.println("\tHeigth " + board.getHeight());
 		board.addCallbackListener(new BoardCallbacks() {
@@ -53,7 +54,7 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 			@Override
 			public void nextPlayer(Player next) 
 			{ 
-				System.out.println("-> Next: " + next.getName());
+				System.out.println("-- Сurrent move: " + next.getName());
 				
 				if (callbacks != null)
 					try {
@@ -62,12 +63,8 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 			}
 			@Override
 			public void updateScore(Player player) {
-				System.out.println("-> Update score: ");
+				System.out.println("-- Current score: ");
 				printPlayersList();
-				if (callbacks != null)
-					try {
-						for(ServerCallbacks sc : callbacks) sc.updateScore(player.getID(), player.getScore());
-					} catch (RemoteException e) { e.printStackTrace(); }
 			}
 			@Override
 			public void gameOver(Player winner) {
@@ -76,21 +73,21 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 					try {
 						for(ServerCallbacks sc : callbacks) sc.gameOver(winner.getID());
 					} catch (RemoteException e) { e.printStackTrace(); }
-				System.out.println("-> Game Over");
-				System.out.println("-> Winner: " + winner.getName());
+				System.out.println("-- Winner: " + winner.getName());
                               
                                 
-				printPlayersList();		
+				printPlayersList();
+                                JOptionPane.showMessageDialog(null, "The game is over! "+winner.getName()+" is Winner!");
 			}
 		});
-		System.out.println("-> Gameboard listener added");
+		System.out.println("-- Gameboard listener added");
 	}
 
 	public static void main(String[] args) {
 		sc = new Scanner(System.in);
-		System.out.println("-> Start server ...");
+		System.out.println("-- Start server ");
 		try {
-			if (args.length<2) obj = new GameServerImpl(6,6);
+			if (args.length<2) obj = new GameServerImpl(10,10);
 			else obj = new GameServerImpl(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
                         
                         String localhost    = "127.0.0.1";
@@ -99,19 +96,19 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
                         Registry registry = LocateRegistry.createRegistry(1099);
 	        registry.rebind(RMI_NAME, obj);
             //Naming.rebind(RMI_NAME, obj);
-            System.out.println("-> Server ready ...");
+            System.out.println("-- Server is ready ");
 
-            System.out.println("-> Waiting for players ...");
+            System.out.println("-- Waiting for clients ");
            
 
             	
-            		System.out.println("-> There are " + playerCount + " players. Start game? [y/n]");
+            		System.out.println("-- Start game? [y/n]");
         			String out = sc.next();
         			if (out.equals("y") || out.equals("Y"))  
         			{ 
         				for(ServerCallbacks sc : callbacks) sc.startGame();
         				board.startGame();  gameOn = true;  }
-        			else System.out.println("-> Waiting for players ...");
+        			else System.out.println("-- Waiting for clients ");
             	
             
         } catch (Exception e) {
@@ -159,9 +156,9 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 		Player p = new Player(name, figure, c);
 		board.newPlayer(p);
 		playersList.add(p);
-		System.out.println("-> Player " + name + " joined ...");
+		System.out.println("--" +  name + " is joined ");
 		playerCount=playerCount+1;
-                System.out.println(playerCount);
+                System.out.println("Сurrent number of clients: "+playerCount);
 		return p.getID();	
 		} else return -1;
 	}
