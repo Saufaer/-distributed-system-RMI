@@ -5,11 +5,9 @@ import game.enigne.*;
 import game.enigne.callbacks.*;
 import game.server.*;
 
-import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
 
 import java.awt.Color;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -91,18 +89,9 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 			if (args.length<2) obj = new GameServerImpl(10,10);
 			else obj = new GameServerImpl(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
                         System.out.println("-- Object created ");
-                  // String localhost    = "127.0.0.1";
-		//String RMI_HOSTNAME = "java.rmi.server.hostname";
-               // System.setProperty(RMI_HOSTNAME, localhost);
-               // Registry registry = LocateRegistry.createRegistry(1099);
-                //registry.rebind(RMI_NAME, obj);
-                 LocateRegistry.createRegistry(1099).rebind(RMI_NAME, obj);
-                 // Registry registry = LocateRegistry.getRegistry();
 
-	      
-         //  Naming.rebind("rmi://localhost/GameServer", obj);
-          //  Naming.rebind(RMI_SERVER+RMI_NAME, obj);
-          // Naming.rebind(RMI_NAME, obj);
+                 LocateRegistry.createRegistry(1099).rebind(RMI_NAME, obj);
+
             System.out.println("-- Server is ready ");
 
             System.out.println("-- Waiting for clients ");
