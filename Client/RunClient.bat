@@ -1,6 +1,6 @@
 java -version
 
-set CLASSPATH=C:\Users\Oleg\Desktop\ProjectRMI\-distributed-system-RMI\Client\build\classes
+set CLASSPATH=C:\distributed-system-RMI\Client\build\classes
 
 java points.client.PointsClient
 
