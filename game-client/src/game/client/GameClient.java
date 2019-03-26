@@ -34,12 +34,13 @@ public class GameClient {
                 System.setProperty(RMI_HOSTNAME, localhost);
                
         	Remote RemoteObject = Naming.lookup(rmi);
+                
         	server = (GameServer)RemoteObject;
         	if (server == null) throw new Exception("RemoteObject return null");
         	//else JOptionPane.showMessageDialog(null, "Server connected");
         } catch (Exception e) {
         	JOptionPane.showMessageDialog(null, "Client exception: " + e.toString(), 
-        			"Cinnection failed", JOptionPane.ERROR_MESSAGE);
+        			"Connection failed", JOptionPane.ERROR_MESSAGE);
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
             System.exit(-1);

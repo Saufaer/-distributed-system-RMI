@@ -87,15 +87,22 @@ public class GameServerImpl extends UnicastRemoteObject implements GameServer {
 		sc = new Scanner(System.in);
 		System.out.println("-- Start server ");
 		try {
+
 			if (args.length<2) obj = new GameServerImpl(10,10);
 			else obj = new GameServerImpl(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
-                        
-                        String localhost    = "127.0.0.1";
-		String RMI_HOSTNAME = "java.rmi.server.hostname";
-                System.setProperty(RMI_HOSTNAME, localhost);
-                        Registry registry = LocateRegistry.createRegistry(1099);
-	        registry.rebind(RMI_NAME, obj);
-            //Naming.rebind(RMI_NAME, obj);
+                        System.out.println("-- Object created ");
+                  // String localhost    = "127.0.0.1";
+		//String RMI_HOSTNAME = "java.rmi.server.hostname";
+               // System.setProperty(RMI_HOSTNAME, localhost);
+               // Registry registry = LocateRegistry.createRegistry(1099);
+                //registry.rebind(RMI_NAME, obj);
+                 LocateRegistry.createRegistry(1099).rebind(RMI_NAME, obj);
+                 // Registry registry = LocateRegistry.getRegistry();
+
+	      
+         //  Naming.rebind("rmi://localhost/GameServer", obj);
+          //  Naming.rebind(RMI_SERVER+RMI_NAME, obj);
+          // Naming.rebind(RMI_NAME, obj);
             System.out.println("-- Server is ready ");
 
             System.out.println("-- Waiting for clients ");
